@@ -21,7 +21,6 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,8 +1,6 @@
-import  firebase  from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AutheService } from './../services/authe.service';
 import { Component } from '@angular/core';
 
-import { Observable } from 'rxjs';
 
 
 
@@ -13,13 +11,12 @@ import { Observable } from 'rxjs';
 })
 export class TopNavbarComponent {
   
-  user$ : Observable<firebase.User>;
+  
 
-  constructor(private afAuth: AngularFireAuth) {
-   this.user$ = afAuth.authState;
+  constructor(public authe: AutheService) {
   }
-   
-logout(){   
- this.afAuth.signOut();
+  logout(){
+  this.authe.logout();
+  }
 }
-}
+

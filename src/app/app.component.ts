@@ -15,7 +15,6 @@ export class AppComponent {
 
       if (user){
       userService.save(user);
-      
       }
     });
   } 

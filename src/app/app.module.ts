@@ -1,3 +1,4 @@
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { UserService } from './services/user.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { AutheService } from './services/authe.service';
@@ -55,8 +56,16 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
       { path: 'order-success', component: OrderSucessComponent, canActivate: [AuthGuard] },
       { path: 'my/orders', component: MyOrderComponent, canActivate: [AuthGuard]},
       
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard] }
+      { path: 'admin/products', 
+        component: AdminProductsComponent, 
+        canActivate: [AuthGuard, AdminAuthGuard] 
+      },
+
+      { path: 'admin/orders',
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuard, AdminAuthGuard]
+
+      }
     ])
     
 
@@ -64,7 +73,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
   providers: [
     AutheService,
     AuthGuard,
-    UserService
+    UserService,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })

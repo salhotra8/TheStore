@@ -1,7 +1,6 @@
 import { AutheService } from './../services/authe.service';
 import { Component } from '@angular/core';
-
-
+import { AppUser } from '../models/app-user';
 
 
 @Component({
@@ -10,10 +9,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-navbar.component.css']
 })
 export class TopNavbarComponent {
+  appUser: AppUser;
   
-  
-
-  constructor(public authe: AutheService) {
+  constructor(private authe: AutheService) {
+    authe.appUser$.subscribe(appUser => this.appUser = appUser);
   }
   logout(){
   this.authe.logout();

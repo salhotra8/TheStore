@@ -9,10 +9,10 @@ import { AutheService } from './authe.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private auth: AutheService, private router: Router) { }
+  constructor(private authe: AutheService, private router: Router) { }
 
 canActivate(route, state:RouterStateSnapshot) {
-  return this.auth.user$.pipe(map(user => {
+  return this.authe.user$.pipe(map(user => {
     if (user) return true
 
   this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});

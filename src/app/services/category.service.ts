@@ -1,4 +1,4 @@
-import { AdminProducts } from './../interface/admin-products';
+import { AdminProducts } from '../models/admin-products';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';

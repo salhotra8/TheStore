@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CustomFormsModule } from 'ng2-validation';
+
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -30,6 +30,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterProductsComponent } from './products/filter-products/filter-products.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 
 
@@ -45,21 +49,28 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     MyOrderComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    FilterProductsComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
-    CustomFormsModule,
+    
     HttpClientModule,
+    Ng2OrderModule,
+    NgxPaginationModule,
+    
+   
+    
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
 
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },

@@ -1,5 +1,8 @@
+import { ShoppingCartService } from './../shopping-cart.service';
 import { AutheService } from './../services/authe.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ShoppingCart } from '../models/shopping-cart';
+import { Observable } from 'rxjs';
 //import { AppUser } from '../models/app-user';
 
 
@@ -8,11 +11,16 @@ import { Component } from '@angular/core';
   templateUrl: './top-navbar.component.html',
   styleUrls: ['./top-navbar.component.css']
 })
-export class TopNavbarComponent {
+export class TopNavbarComponent implements OnInit {
   //appUser: AppUser;
-  
-  constructor(public authe: AutheService) {
+  // cart$: Observable<ShoppingCart>;
+
+  constructor(public authe: AutheService, private cartService: ShoppingCartService) {
     //authe.appUser$.subscribe(appUser => this.appUser = appUser);
+  }
+
+  async ngOnInit(){
+    // this.cart$ = await this.cartService.getCart();
   }
   logout(){
   this.authe.logout();

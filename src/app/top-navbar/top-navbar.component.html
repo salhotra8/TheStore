@@ -13,7 +13,12 @@
           </li>
         </ng-template>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/shopping-cart">Shopping Cart</a>
+          <a class="nav-link" routerLink="/shopping-cart">
+            Shopping Cart
+            <!-- <span class="badge bg-warning text-dark badge-pill" *ngIf="cart$  | async as cart">
+              {{ cart.totalItemCount }}
+            </span> -->
+          </a>
         </li>
         <li ngbDropdown *ngIf = "authe.user$ | async as user; else anonymousUser" class="nav-item dropdown">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">

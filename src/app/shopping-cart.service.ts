@@ -16,20 +16,26 @@ export class ShoppingCartService {
   }
 
   private create(){
-    return this.db.list('/shopping-cart').push({
+    return this.db.list('/shopping-carts').push({
       dateCreated: new Date().getTime()
     });
   }
 
-  async getCart(): Promise<Observable<ShoppingCart>> {
+  async getCart() {
     let cartId = await this.getOrCreateCartId();
     return this.db
-        .object('/shopping-carts/' + cartId).valueChanges()
-          .pipe(map((x) => new ShoppingCart(this.x.items)));         
+        .object('/shopping-carts/' + cartId).valueChanges();
   }
 
+  // async getCart(): Promise<Observable<ShoppingCart>> {
+  //   let cartId = await this.getOrCreateCartId();
+  //   return this.db
+  //       .object('/shopping-carts/' + cartId).valueChanges()
+  //         .pipe(map((x) => new ShoppingCart(this.x.items)));         
+  // }
+
   private getItem(cartId: string, productId: string){
-    return this.db.object('/shopping-cart/' + cartId + '/items/' + productId);
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
   }
 
   private async getOrCreateCartId(): Promise<string> {

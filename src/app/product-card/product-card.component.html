@@ -5,7 +5,8 @@
     <p class="card-text">{{product.price | currency }}</p>
   </div>
   <div *ngIf="showActions" class="card-footer d-grid gap-2">
-    <button *ngIf= "getQuantity() === 0; else updateQuantity"
+    <button 
+      *ngIf= "getQuantity() === 0; else updateQuantity"
       (click)="addToCart()" 
       class="btn btn-warning btn-block">Add to cart</button>
     <ng-template #updateQuantity>

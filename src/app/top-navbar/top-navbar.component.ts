@@ -13,14 +13,17 @@ import { Observable } from 'rxjs';
 })
 export class TopNavbarComponent implements OnInit {
   //appUser: AppUser;
-  // cart$: Observable<ShoppingCart>;
+  cart$: Observable<ShoppingCart>;
+  
 
   constructor(public authe: AutheService, private cartService: ShoppingCartService) {
     //authe.appUser$.subscribe(appUser => this.appUser = appUser);
   }
 
   async ngOnInit(){
-    // this.cart$ = await this.cartService.getCart();
+    this.cart$ = await this.cartService.getCart();
+    
+    
   }
   logout(){
   this.authe.logout();

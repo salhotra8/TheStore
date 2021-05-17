@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ShoppingCartService {  
-  x:any = {};
+
  
 
   constructor(private db:AngularFireDatabase)  {
@@ -21,18 +21,14 @@ export class ShoppingCartService {
     });
   }
 
-  async getCart() {
+  async getCart(): Promise<Observable<ShoppingCart>> {
     let cartId = await this.getOrCreateCartId();
     return this.db
-        .object('/shopping-carts/' + cartId).valueChanges();
+        .object('/shopping-carts/' + cartId).valueChanges()
+        .pipe(map((x:any) => new ShoppingCart(x.items)));
   }
 
-  // async getCart(): Promise<Observable<ShoppingCart>> {
-  //   let cartId = await this.getOrCreateCartId();
-  //   return this.db
-  //       .object('/shopping-carts/' + cartId).valueChanges()
-  //         .pipe(map((x) => new ShoppingCart(this.x.items)));         
-  // }
+
 
   private getItem(cartId: string, productId: string){
     return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);

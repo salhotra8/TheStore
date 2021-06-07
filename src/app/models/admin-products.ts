@@ -4,4 +4,5 @@ export interface AdminProducts {
     price: number;
     category: string;
     imageUrl: string;
+
 }

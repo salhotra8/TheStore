@@ -1,0 +1,18 @@
+.thumbnail{
+  width:80px;
+  height:80px;
+  border-radius: 100%;
+  background-size: cover;
+  margin: 10px;
+}
+
+.heading {
+  width: 230px;
+  text-align: center;
+  
+}
+
+.body {
+  text-align: center;
+  vertical-align: middle;
+}

@@ -6,7 +6,8 @@ import { CategoryService } from './../services/category.service';
 import { ProductService } from './../services/product.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AdminProducts } from '../models/admin-products';
-import {  Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { ShoppingCart } from '../models/shopping-cart';
 
 
 @Component({
@@ -14,38 +15,42 @@ import {  Subscription } from 'rxjs';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit {
 
   products: any = [];
   filteredProducts: [];
   category : string;
-  cart:any;
+  cart$:Observable<ShoppingCart>;
   subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private productService : ProductService,
-    private cartService: ShoppingCartService) { 
+    private cartService: ShoppingCartService) {   
     
+  }
+  
+  async ngOnInit(){
+    this.cart$ =  (await this.cartService.getCart())
+    this.populateProducts();
+   
+  }
+
+  private applyFilter(){
+    this.filteredProducts =(this.category) ? 
+      this.products.filter(p => p.category === this.category) : this.products;
+  }
+  
+  private populateProducts(){
     this.productService.getAll().pipe(
       switchMap(products => {
         this.products = products;
         return this.route.queryParamMap;
       }))
-        .subscribe(params => {
-          this.category = params.get('category');
-    
-          this.filteredProducts =(this.category) ? 
-            this.products.filter(p => p.category === this.category) : this.products;
-        })
-  }
   
-  async ngOnInit(){
-   this.subscription =  (await this.cartService.getCart())
-      .subscribe(cart => this.cart = cart);
-  }
-
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
+      .subscribe(params => {
+        this.category = params.get('category');
+        this.applyFilter();   
+      })
   }
 }

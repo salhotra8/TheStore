@@ -34,6 +34,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterProductsComponent } from './products/filter-products/filter-products.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 
 
@@ -51,7 +52,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     AdminOrdersComponent,
     ProductFormComponent,
     FilterProductsComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,

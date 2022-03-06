@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AutheService } from './services/authe.service';
-import { UserService } from './services/user.service';
+import { AutheService } from './shared/services/authe.service';
+import { UserService } from './shared/services/user.service';
 
 
 @Component({

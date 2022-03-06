@@ -1,14 +1,14 @@
 import { map, take } from 'rxjs/operators';
-import { AdminProducts } from './models/admin-products';
+import { AdminProducts } from './shared/models/admin-products';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { ShoppingCart } from './models/shopping-cart';
+import { ShoppingCart } from './shared/models/shopping-cart';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ShoppingCartService {  
+export class ShoppingCartService {
 
   constructor(private db:AngularFireDatabase)  {
   }
@@ -22,26 +22,29 @@ export class ShoppingCartService {
   }
 
   addToCart(product: AdminProducts){
-    this.updateQuantity(product, 1);
+    this.updateItem(product, 1);
   }
 
   removeFromCart(product: AdminProducts){
-    this.updateQuantity(product, -1);
+    this.updateItem(product, -1);
   }
 
-  async updateQuantity(product: AdminProducts, change: number){
+  async updateItem(product: AdminProducts, change: number){
     let cartId = await this.getOrCreateCartId();
     let item$ = this.getItem(cartId, product.key);
     
     item$.valueChanges().pipe(take(1)).subscribe((item:any) => {
-      // if(item.$exist()) item$.update({quantity: item.quantity + 1});
-      // else item$.set({ product: product , quantity: 1});
+
       let quantity = ((item || {}).quantity || 0) + change;
       if(quantity === 0) item$.remove();
-      else item$.update({
-       product : product , quantity
+      
+      else item$.update({ 
+        title:product.title,
+        imageUrl:product.imageUrl,
+        price: product.price,
+        quantity: quantity 
       });
-      });
+    });
   }
 
   async clearFromCart(){

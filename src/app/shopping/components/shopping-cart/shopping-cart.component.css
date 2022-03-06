@@ -1,0 +1,40 @@
+.thumbnail{
+  width:80px;
+  height:80px;
+  border-radius: 100%;
+  background-size: cover;
+  margin: 5px;
+}
+
+.heading {
+  width: 230px;
+  text-align: center;
+  
+}
+
+.body {
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+.btn-warning{
+  font-size: 18px;
+  left:55%;
+  position: absolute;
+}
+
+.btn-warning:hover{
+
+  background-color: orange;
+
+}
+
+.btn-light {
+  color: grey;
+}
+
+.btn-light:hover{
+
+  background-color: rgb(231, 231, 231);
+}
